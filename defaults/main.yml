@@ -1,0 +1,13 @@
+---
+# defaults file for .
+backup_host: my-backup.host
+backup_user: my-backup-user
+backup_pass: my-secret
+
+backup_script_dir: /opt/scripts
+
+backup_service: service
+
+backup_dest_dir: "/backup/{{backup_service}}/"
+backup_src_dir: "/service/backup/"
+

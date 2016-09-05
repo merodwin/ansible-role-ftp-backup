@@ -1,0 +1,18 @@
+---
+# tasks file for .
+
+- name: install lftp
+  apt: name=lftp state=latest
+
+- name: ensure script folder exists
+  file: path="{{backup_script_dir}}" state=directory mode=0755
+
+- name: create backup scripts
+  template: src="backup.sh.j2" dest="{{backup_script_dir}}/backup_{{backup_service}}.sh" mode=700
+  
+
+- name: add backup chron
+  cron: name="backup {{backup_service}}" minute="0" hour="3" job="bash {{backup_script_dir}}/backup_{{backup_service}}.sh > /dev/null" 
+
+
+
